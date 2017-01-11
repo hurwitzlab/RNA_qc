@@ -26,7 +26,7 @@ PRJ_DIR="/rsgrps/bhurwitz/scottdaniel/RNA_qc"
 #
 # Where we can find scripts
 #
-export SCRIPT_DIR="$PRJ_DIR/scripts/"
+export SCRIPT_DIR="$PRJ_DIR/scripts"
 export WORKER_DIR="$SCRIPT_DIR/workers"
 
 #
