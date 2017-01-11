@@ -40,8 +40,8 @@ while read LEFT_FASTQ; do
         test1=$(echo $LEFT_FASTQ | sed s/_R[1-2]//)
 
         if [ "$test1" = "$test2" ]; then
-            IN_LEFT=$FILTERED_FQ/$LEFT_FASTQ
-            IN_RIGHT=$FILTERED_FQ/$RIGHT_FASTQ
+            IN_LEFT=$FILTERED_DIR/$LEFT_FASTQ
+            IN_RIGHT=$FILTERED_DIR/$RIGHT_FASTQ
            
             NEWNAME=$(echo $LEFT_FASTQ | sed s/_R[1,2]//)
 

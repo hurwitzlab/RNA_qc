@@ -90,3 +90,8 @@ ENV/
 
 data/
 out/
+
+files-to-process
+left_fastqs
+orphan-list
+right_fastqs
