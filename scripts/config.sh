@@ -21,12 +21,13 @@ export GROUP="bhurwitz"
 #
 # The main checkout
 #
-PRJ_DIR="/rsgrps/bhurwitz/scottdaniel/mouse"
+PRJ_DIR="/rsgrps/bhurwitz/scottdaniel/RNA_qc"
 
 #
-# Where we can find the worker scripts
+# Where we can find scripts
 #
-export SCRIPT_DIR="$PRJ_DIR/scripts/workers"
+export SCRIPT_DIR="$PRJ_DIR/scripts/"
+export WORKER_DIR="$SCRIPT_DIR/workers"
 
 #
 # Where to put all our generated data

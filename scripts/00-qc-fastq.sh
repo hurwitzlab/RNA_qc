@@ -35,7 +35,7 @@ fi
 
 echo RAW_DIR \"$RAW_DIR\"
 
-export FILES_LIST="./$PROG.in"
+export FILES_LIST="$DATA_DIR/fastq_list"
 
 #
 # find those RNA files!
@@ -51,7 +51,7 @@ if [[ $NUM_FILES -lt 1 ]]; then
   exit 1
 fi
 
-JOB=$(qsub -J 1-$NUM_FILES:$STEP_SIZE -V -N qc_fastq -j oe -o "$STDOUT_DIR" $SCRIPT_DIR/qc_fastq.sh)
+JOB=$(qsub -J 1-$NUM_FILES:$STEP_SIZE -V -N qc_fastq -j oe -o "$STDOUT_DIR" $WORKER_DIR/qc_fastq.sh)
 
 if [[ $? -eq 0 ]]; then
   echo Submitted job \"$JOB\" for you in steps of \"$STEP_SIZE.\" Sayonara.
