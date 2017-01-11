@@ -29,8 +29,55 @@ export RIGHT_FILES_LIST="$PRJ_DIR/right_fastqs"
 
 echo "Finding fastq's"
 
-find . -type f -iname \*R1\*.fastq | sed "s/^\.\///" | sort > $LEFT_FILES_LIST 
-find . -type f -iname \*R2\*.fastq | sed "s/^\.\///" | sort > $RIGHT_FILES_LIST 
+find . -type f -iname \*R1\*clipped | sed "s/^\.\///" | sort > $LEFT_FILES_LIST 
+find . -type f -iname \*R2\*clipped | sed "s/^\.\///" | sort > $RIGHT_FILES_LIST 
+
+echo "Checking if orphaned"
+
+export $ORPHAN_LIST="$PRJ_DIR/orphan-list"
+
+if [ -e $ORPHAN_LIST ]; then
+    rm $ORPHAN_LIST
+fi
+
+while read FASTQ; do
+
+    NEWNAME=$(echo $FASTQ | sed s/_R[1,2]//)
+
+    NEWLIST=$(mktemp)
+
+    cat $RIGHT_FILES_LIST | sed s/_R[1,2]// > $NEWLIST
+
+    FOUND=$(egrep $FASTQ $NEWLIST)
+
+    if [[ -n "$FOUND" ]]; then
+        continue
+    else
+        echo "$FASTQ" is an orphan
+        echo "$FASTQ" >> $ORPHAN_LIST
+    fi
+
+done < $LEFT_FILES_LIST
+
+while read FASTQ; do
+
+    NEWNAME=$(echo $FASTQ | sed s/_R[1,2]//)
+
+    NEWLIST=$(mktemp)
+
+    cat $LEFT_FILES_LIST | sed s/_R[1,2]// > $NEWLIST
+
+    FOUND=$(egrep $FASTQ $NEWLIST)
+
+    if [[ -n "$FOUND" ]]; then
+        continue
+    else
+        echo "$FASTQ" is an orphan
+        echo "$FASTQ" >> $ORPHAN_LIST
+    fi
+
+done < $RIGHT_FILES_LIST
+
 
 echo "Checking if already processed"
 
@@ -44,7 +91,7 @@ while read FASTQ; do
  
     NEWNAME=$(echo $FASTQ | sed s/_R[1,2]//)
 
-    OUT=$SORTNMG_DIR/$(basename $NEWNAME ".filtered.fastq").1.fastq
+    OUT=$SORTNMG_DIR/$(basename $NEWNAME ".fastq.trimmed.clipped").1.fastq
 
     if [[ -e $OUT ]]; then
         continue

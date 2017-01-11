@@ -45,7 +45,7 @@ while read LEFT_FASTQ; do
            
             NEWNAME=$(echo $LEFT_FASTQ | sed s/_R[1,2]//)
 
-            OUT=$SORTNMG_DIR/$(basename $NEWNAME ".filtered.fastq")
+            OUT=$SORTNMG_DIR/$(basename $NEWNAME ".fastq.trimmed.clipped")
             
             if [[ -e "$OUT".1.fastq ]]; then
                 echo "Merged file already exists, skipping..."
@@ -70,4 +70,3 @@ while read LEFT_FASTQ; do
 done < "$LEFT_TMP_FILES"
 
 echo "Done at $(date)"
-
