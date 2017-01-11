@@ -35,7 +35,7 @@ fi
 
 echo RAW_DIR \"$RAW_DIR\"
 
-export FILES_LIST="$DATA_DIR/fastq_list"
+export FILES_LIST="$PRJ_DIR/fastq_list"
 
 #
 # find those RNA files!

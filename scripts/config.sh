@@ -22,6 +22,8 @@ export GROUP="bhurwitz"
 # The main checkout
 #
 PRJ_DIR="/rsgrps/bhurwitz/scottdaniel/RNA_qc"
+#where programs are
+export BIN_DIR="/rsgrps/bhurwitz/hurwitzlab/bin"
 
 #
 # Where we can find scripts

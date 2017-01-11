@@ -59,7 +59,7 @@ NUM_FILES=$(lc $FILES_TO_PROCESS)
 echo \"Found $NUM_FILES to process\"
 
 echo \"Splitting them up in batches of "$STEP_SIZE"\"
-
+#this whole loop thing was to be cross-compatible with slurm
 let i=1
 
 while (( "$i" <= "$NUM_FILES" )); do

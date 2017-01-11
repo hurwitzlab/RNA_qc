@@ -48,15 +48,15 @@ while read FILE; do
   let i++
   printf "%5d: %s\n" $i $BASENAME
 
-  for F in $FASTQ_DIR/${BASENAME}*; do
+  for F in $FILTERED_DIR/${BASENAME}*; do
     rm -f $F
   done
 
-  TRIMMED_FILE=$FASTQ_DIR/${BASENAME}.trimmed
+  TRIMMED_FILE=$FILTERED_DIR/${BASENAME}.trimmed
   # Analysis makes pretty graphs, dynamictrim individually crops each read to its longest contiguous segment for which quality scores are greater than a user-supplied quality cutoff (default is Q=13 so each base is at least 14)
   if [[ ! -e $TRIMMED_FILE ]]; then
     for ACTION in analysis dynamictrim; do
-      $BIN_DIR/SolexaQA++ $ACTION -d $FASTQ_DIR $FILE
+      $BIN_DIR/SolexaQA++ $ACTION -d $FILTERED_DIR $FILE
     done
   fi
 
