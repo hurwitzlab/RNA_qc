@@ -52,7 +52,11 @@ while read FASTQ; do
         echo "$FASTQ" is an orphan
         echo "$FASTQ" >> $ORPHAN_LIST
         OUT=$SORTNMG_DIR/$(basename $NEWNAME ".fastq.trimmed.clipped").nomatch.fastq
-        cp $FASTQ $OUT
+        if [[ ! -e $OUT ]]; then
+            cp $FASTQ $OUT
+        else
+            echo "Orphan "$OUT" already copied"
+        fi
     else
         echo "$FASTQ" is not an orphan
         continue
@@ -72,7 +76,11 @@ while read FASTQ; do
         echo "$FASTQ" is an orphan
         echo "$FASTQ" >> $ORPHAN_LIST
         OUT=$SORTNMG_DIR/$(basename $NEWNAME ".fastq.trimmed.clipped").nomatch.fastq
-        cp $FASTQ $OUT
+        if [[ ! -e $OUT ]]; then
+            cp $FASTQ $OUT
+        else
+            echo "Orphan "$OUT" already copied"
+        fi
     else
         echo "$FASTQ" is not an orphan
         continue

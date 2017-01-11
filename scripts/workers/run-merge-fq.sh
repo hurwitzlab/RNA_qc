@@ -67,7 +67,7 @@ while read LEFT_FASTQ; do
             continue
         fi
 
-        done < "$RIGHT_FILE_LIST"
+        done < "$RIGHT_FILES_LIST"
 
 done < "$LEFT_TMP_FILES"
 
