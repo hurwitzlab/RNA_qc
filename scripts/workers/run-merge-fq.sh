@@ -22,10 +22,11 @@ set -u
 echo "Started at $(date) on host $(hostname)"
 
 LEFT_TMP_FILES=$(mktemp)
-RIGHT_TMP_FILES=$(mktemp)
+#RIGHT_TMP_FILES=$(mktemp)
 
 get_lines $LEFT_FILES_LIST $LEFT_TMP_FILES $FILE_START $STEP_SIZE
-get_lines $RIGHT_FILES_LIST $RIGHT_TMP_FILES $FILE_START $STEP_SIZE
+#get_lines $RIGHT_FILES_LIST $RIGHT_TMP_FILES $FILE_START $STEP_SIZE
+#Just check through the whole right_files_list
 
 NUM_FILES=$(lc $LEFT_TMP_FILES)
 
@@ -62,10 +63,11 @@ while read LEFT_FASTQ; do
                 -t
 
         else
+            echo Could not find a match for "$LEFT_FASTQ"
             continue
         fi
 
-        done < "$RIGHT_TMP_FILES"
+        done < "$RIGHT_FILE_LIST"
 
 done < "$LEFT_TMP_FILES"
 
